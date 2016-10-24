@@ -5,7 +5,7 @@ const defaultSuggestionsFilter = (searchValue, suggestions) => {
     !value || suggestion.get('name').toLowerCase().indexOf(value) > -1
   ));
 
-  return filteredSuggestions.setSize(filteredSuggestions.size);
+  return filteredSuggestions;
 };
 
 export default defaultSuggestionsFilter;
