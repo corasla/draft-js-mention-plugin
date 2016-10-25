@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import ReactDOM from 'react-dom';
 import Entry from './Entry';
 import addMention from '../modifiers/addMention';
 import decodeOffsetKey from '../utils/decodeOffsetKey';
@@ -75,6 +75,14 @@ export default class MentionSuggestions extends Component {
       Object.keys(newStyles).forEach((key) => {
         this.refs.popover.style[key] = newStyles[key];
       });
+
+      // scroll to selected option
+      const diff = (this.state.focusedOptionIndex - 3) * 28;
+      const div = ReactDOM.findDOMNode(this.refs.popover);
+
+      if (diff !== div.scrollTop) {
+          div.scrollTop = diff;
+      }
     }
   };
 
