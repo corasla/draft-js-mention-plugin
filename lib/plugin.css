@@ -20,26 +20,27 @@
   background: #455261;
 }
 .draftJsMentionPlugin__mentionSuggestionsEntry__3mSwm {
-  padding: 7px 10px 3px 10px;
+  padding: 3px 5px 3px 5px;
+  height: 22px;
   -webkit-transition: background-color 0.4s cubic-bezier(.27,1.27,.48,.56);
   transition: background-color 0.4s cubic-bezier(.27,1.27,.48,.56);
 }
 
 .draftJsMentionPlugin__mentionSuggestionsEntry__3mSwm:active {
-  background-color: #cce7ff;
+  background-color: #e0e0e0;
 }
 
 .draftJsMentionPlugin__mentionSuggestionsEntryFocused__3LcTd {
-  background-color: #e6f3ff;
+  background-color: #cccccc;
 }
 
 .draftJsMentionPlugin__mentionSuggestionsEntryText__3Jobq {
   display: inline-block;
-  margin-left: 8px;
+  margin-left: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 368px;
+  width: 100%;
   font-size: 0.9em;
   margin-bottom: 0.2em;
 }
@@ -54,9 +55,8 @@
   border: 1px solid #eee;
   margin-top: 1.75em;
   position: absolute;
-  min-width: 220px;
-  max-width: 440px;
-  max-height: 84px;
+  width: 165px;
+  max-height: 96px;
   overflow-y: scroll;
   overflow-x: hidden;
   background: #fff;
