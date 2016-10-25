@@ -182,7 +182,7 @@ export default class MentionSuggestions extends Component {
   }
 
   scrollToOptionIndex = () => {
-      if (!state.isActive) {
+      if (!this.state.isActive) {
           return;
       }
       // scroll to selected option
