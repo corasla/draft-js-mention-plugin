@@ -182,6 +182,9 @@ export default class MentionSuggestions extends Component {
   }
 
   scrollToOptionIndex = () => {
+      if (!state.isActive) {
+          return;
+      }
       // scroll to selected option
       const diff = (this.state.focusedOptionIndex - 2) * 28;
       const div = ReactDOM.findDOMNode(this.refs.popover);

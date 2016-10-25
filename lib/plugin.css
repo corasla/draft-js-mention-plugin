@@ -1,8 +1,6 @@
 .draftJsMentionPlugin__mention__29BEd, .draftJsMentionPlugin__mention__29BEd:visited {
-  color: #575f67;
-  cursor: pointer;
+  color: #527871;
   display: inline-block;
-  background: #e6f3ff;
   padding-left: 2px;
   padding-right: 2px;
   border-radius: 2px;
@@ -11,13 +9,8 @@
 
 .draftJsMentionPlugin__mention__29BEd:hover, .draftJsMentionPlugin__mention__29BEd:focus {
   color: #677584;
-  background: #edf5fd;
+  background: #e8f3f0;
   outline: 0; /* reset for :focus */
-}
-
-.draftJsMentionPlugin__mention__29BEd:active {
-  color: #222;
-  background: #455261;
 }
 .draftJsMentionPlugin__mentionSuggestionsEntry__3mSwm {
   padding: 3px 5px 3px 5px;
