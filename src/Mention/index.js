@@ -40,6 +40,7 @@ const Mention = (props) => {
 
   return (
     <Component
+      {...props}
       entityKey={entityKey}
       mention={mention}
       theme={theme}

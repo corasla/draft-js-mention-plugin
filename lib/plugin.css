@@ -1,17 +1,17 @@
 .draftJsMentionPlugin__mention__29BEd, .draftJsMentionPlugin__mention__29BEd:visited {
   color: #527871;
-  display: inline-block;
+  /*display: inline-block;
   padding-left: 2px;
   padding-right: 2px;
-  border-radius: 2px;
+  border-radius: 2px;*/
   text-decoration: none;
 }
 
-.draftJsMentionPlugin__mention__29BEd:hover, .draftJsMentionPlugin__mention__29BEd:focus {
+/*.mention:hover, .mention:focus {
   color: #677584;
   background: #e8f3f0;
-  outline: 0; /* reset for :focus */
-}
+  outline: 0; 
+}*/
 .draftJsMentionPlugin__mentionSuggestionsEntry__3mSwm {
   padding: 3px 5px 3px 5px;
   height: 22px;
