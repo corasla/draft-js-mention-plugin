@@ -75,14 +75,6 @@ export default class MentionSuggestions extends Component {
       Object.keys(newStyles).forEach((key) => {
         this.refs.popover.style[key] = newStyles[key];
       });
-
-      // scroll to selected option
-      const diff = (this.state.focusedOptionIndex - 2) * 28;
-      const div = ReactDOM.findDOMNode(this.refs.popover);
-
-      if (diff !== div.scrollTop) {
-          div.scrollTop = diff;
-      }
     }
   };
 
@@ -165,9 +157,7 @@ export default class MentionSuggestions extends Component {
     // or the selection was moved to another mention search
     if (this.lastSelectionIsInsideWord === undefined ||
         !selectionIsInsideWord.equals(this.lastSelectionIsInsideWord)) {
-      this.setState({
-        focusedOptionIndex: 0,
-      });
+      this.resetFocusedOptionIndex();
     }
 
     this.lastSelectionIsInsideWord = selectionIsInsideWord;
@@ -181,13 +171,31 @@ export default class MentionSuggestions extends Component {
     if (this.lastSearchValue !== searchValue) {
       this.lastSearchValue = searchValue;
       this.props.onSearchChange({ value: searchValue });
+      this.resetFocusedOptionIndex();
     }
   };
+
+  resetFocusedOptionIndex = () => {
+    this.setState({
+      focusedOptionIndex: 0,
+    });
+  }
+
+  scrollToOptionIndex = () => {
+      // scroll to selected option
+      const diff = (this.state.focusedOptionIndex - 2) * 28;
+      const div = ReactDOM.findDOMNode(this.refs.popover);
+
+      if (diff !== div.scrollTop) {
+          div.scrollTop = diff;
+      }
+  }
 
   onDownArrow = (keyboardEvent) => {
     keyboardEvent.preventDefault();
     const newIndex = this.state.focusedOptionIndex + 1;
     this.onMentionFocus(newIndex >= this.props.suggestions.size ? 0 : newIndex);
+    this.scrollToOptionIndex();
   };
 
   onTab = (keyboardEvent) => {
@@ -199,7 +207,8 @@ export default class MentionSuggestions extends Component {
     keyboardEvent.preventDefault();
     if (this.props.suggestions.size > 0) {
       const newIndex = this.state.focusedOptionIndex - 1;
-      this.onMentionFocus(Math.max(newIndex, 0));
+      this.onMentionFocus(newIndex < 0 ? this.props.suggestions.size : newIndex);
+      this.scrollToOptionIndex();
     }
   };
 

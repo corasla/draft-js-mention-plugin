@@ -27,6 +27,10 @@
 }
 
 .draftJsMentionPlugin__mentionSuggestionsEntry__3mSwm:active {
+  background-color: #cccccc;
+}
+
+.draftJsMentionPlugin__mentionSuggestionsEntry__3mSwm:hover {
   background-color: #e0e0e0;
 }
 
