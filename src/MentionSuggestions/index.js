@@ -35,6 +35,7 @@ export default class MentionSuggestions extends Component {
   componentWillMount() {
     this.key = genKey();
     this.props.callbacks.onChange = this.onEditorStateChange;
+    console.log('got props -> ', this.props.callbacks);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -264,12 +265,22 @@ export default class MentionSuggestions extends Component {
     return true;
   };
 
+  keyBindingFn = (keyboardEvent) => {
+      // when pressing SpaceBar, intercept that keyCode and commit the current selection
+      if (keyboardEvent.keyCode === 32) {
+          this.commitSelection();
+      }
+
+      return undefined;
+  }
+
   openDropdown = () => {
     // This is a really nasty way of attaching & releasing the key related functions.
     // It assumes that the keyFunctions object will not loose its reference and
     // by this we can replace inner parameters spread over different modules.
     // This better be some registering & unregistering logic. PRs are welcome :)
     this.props.callbacks.onDownArrow = this.onDownArrow;
+    this.props.callbacks.keyBindingFn = this.keyBindingFn;
     this.props.callbacks.onUpArrow = this.onUpArrow;
     this.props.callbacks.onEscape = this.onEscape;
     this.props.callbacks.handleReturn = this.commitSelection;
@@ -292,6 +303,7 @@ export default class MentionSuggestions extends Component {
   closeDropdown = () => {
     // make sure none of these callbacks are triggered
     this.props.callbacks.onDownArrow = undefined;
+    this.props.callbacks.keyBindingFn = undefined;
     this.props.callbacks.onUpArrow = undefined;
     this.props.callbacks.onTab = undefined;
     this.props.callbacks.onEscape = undefined;

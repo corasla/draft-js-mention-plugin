@@ -10,6 +10,7 @@ import mentionSuggestionsStyles from './mentionSuggestionsStyles.css';
 import mentionSuggestionsEntryStyles from './mentionSuggestionsEntryStyles.css';
 import suggestionsFilter from './utils/defaultSuggestionsFilter';
 import defaultPositionSuggestions from './utils/positionSuggestions';
+import { KeyBindingUtil } from 'draft-js';
 
 const createMentionPlugin = (config = {}) => {
   const defaultTheme = {
@@ -123,7 +124,13 @@ const createMentionPlugin = (config = {}) => {
       store.getEditorState = getEditorState;
       store.setEditorState = setEditorState;
     },
-
+    // keyBindingFn: (keyboardEvent) => {
+    //     console.log('got something -> ');
+    //     console.log(event);
+    //     console.log(event.keyCode);
+    //     return undefined;
+    // },
+    keyBindingFn: (keyboardEvent) => callbacks.keyBindingFn && callbacks.keyBindingFn(keyboardEvent),
     onDownArrow: (keyboardEvent) => callbacks.onDownArrow && callbacks.onDownArrow(keyboardEvent),
     onTab: (keyboardEvent) => callbacks.onTab && callbacks.onTab(keyboardEvent),
     onUpArrow: (keyboardEvent) => callbacks.onUpArrow && callbacks.onUpArrow(keyboardEvent),
