@@ -13,7 +13,7 @@ export default class CreateButton extends Component {
     super(props);
   }
 
-  clicked = () => {
+  clickedCreate = () => {
       this.props.clickedCreate();
   }
 

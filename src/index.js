@@ -7,6 +7,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import { Map } from 'immutable';
 import mentionStyles from './mentionStyles.css';
 import mentionSuggestionsStyles from './mentionSuggestionsStyles.css';
+import mentionHolderStyles from './mentionHolderStyles.css';
 import mentionCreateButtonStyles from './mentionCreateButtonStyles.css';
 import mentionSuggestionsEntryStyles from './mentionSuggestionsEntryStyles.css';
 import suggestionsFilter from './utils/defaultSuggestionsFilter';
@@ -17,6 +18,8 @@ const createMentionPlugin = (config = {}) => {
   const defaultTheme = {
     // CSS class for mention text
     mention: mentionStyles.mention,
+    // CSS class for mentionSuggestions holder
+    mentionHolder: mentionHolderStyles.mentionHolder,
     // CSS class for suggestions component
     mentionSuggestions: mentionSuggestionsStyles.mentionSuggestions,
     // CSS class for create mention button component

@@ -7,7 +7,7 @@ import decodeOffsetKey from '../utils/decodeOffsetKey';
 import { genKey } from 'draft-js';
 import getSearchText from '../utils/getSearchText';
 import defaultEntryComponent from './Entry/defaultEntryComponent';
-import { List } from 'immutable';
+import { List, fromJS } from 'immutable';
 
 export default class MentionSuggestions extends Component {
 
@@ -30,7 +30,7 @@ export default class MentionSuggestions extends Component {
 
   state = {
     isActive: false,
-    focusedOptionIndex: 0,
+    focusedOptionIndex: -1,
   };
 
   componentWillMount() {
@@ -40,7 +40,7 @@ export default class MentionSuggestions extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.suggestions.size === 0 && this.state.isActive) {
-      this.closeDropdown();
+    //   this.closeDropdown();
     }
   }
 
@@ -71,10 +71,17 @@ export default class MentionSuggestions extends Component {
         prevState,
         props: this.props,
         state: this.state,
-        popover: this.refs.popover,
+        popover: this.refs.popoverHolder,
       });
       Object.keys(newStyles).forEach((key) => {
-        this.refs.popover.style[key] = newStyles[key];
+        if (key !== 'transform') {
+            this.refs.popoverHolder.style[key] = newStyles[key];
+        }
+      });
+      Object.keys(newStyles).forEach((key) => {
+          if (key === 'transform') {
+              this.refs.popover.style[key] = newStyles[key];
+          }
       });
     }
   };
@@ -178,7 +185,7 @@ export default class MentionSuggestions extends Component {
 
   resetFocusedOptionIndex = () => {
     this.setState({
-      focusedOptionIndex: 0,
+      focusedOptionIndex: -1,
     });
   }
 
@@ -198,7 +205,7 @@ export default class MentionSuggestions extends Component {
   onDownArrow = (keyboardEvent) => {
     keyboardEvent.preventDefault();
     const newIndex = this.state.focusedOptionIndex + 1;
-    this.onMentionFocus(newIndex >= this.props.suggestions.size ? 0 : newIndex);
+    this.onMentionFocus(newIndex >= this.props.suggestions.size ? -1 : newIndex);
     this.scrollToOptionIndex();
   };
 
@@ -209,9 +216,9 @@ export default class MentionSuggestions extends Component {
 
   onUpArrow = (keyboardEvent) => {
     keyboardEvent.preventDefault();
-    if (this.props.suggestions.size > 0) {
+    if (this.props.suggestions.size >= 0) {
       const newIndex = this.state.focusedOptionIndex - 1;
-      this.onMentionFocus(newIndex < 0 ? this.props.suggestions.size : newIndex);
+      this.onMentionFocus(newIndex < -1 ? this.props.suggestions.size - 1 : newIndex);
       this.scrollToOptionIndex();
     }
   };
@@ -261,7 +268,12 @@ export default class MentionSuggestions extends Component {
   };
 
   commitSelection = () => {
-    this.onMentionSelect(this.props.suggestions.get(this.state.focusedOptionIndex));
+    if (this.state.focusedOptionIndex === -1) { // create tag button
+        this.createButtonClicked();
+    } else {
+        this.onMentionSelect(this.props.suggestions.get(this.state.focusedOptionIndex));
+    }
+
     return true;
   };
 
@@ -322,7 +334,19 @@ export default class MentionSuggestions extends Component {
   };
 
   createButtonClicked = () => {
-      console.log('prea tare!');
+      if (this.props.onCreateMentionRequested) {
+        this.props.onCreateMentionRequested(this.lastSearchValue);
+
+        const fakeMentionsMap: Map = fromJS([
+            {
+                text: this.lastSearchValue,
+                name: this.lastSearchValue, // for now we continue with this little trick
+            }
+        ]);
+
+        const newMention: any = fakeMentionsMap.get(0);
+        this.onMentionSelect(newMention);
+      }
   }
 
   render() {
@@ -344,32 +368,38 @@ export default class MentionSuggestions extends Component {
       ...elementProps } = this.props;
 
     return (
-        <div>
-          <CreateButton clickedCreate={this.createButtonClicked}/>
-          <div
-            {...elementProps}
-            className={theme.mentionSuggestions}
-            role="listbox"
-            id={`mentions-list-${this.key}`}
-            ref="popover"
-          >
-            {
-              this.props.suggestions.map((mention, index) => (
-                <Entry
-                  key={mention.has('id') ? mention.get('id') : mention.get('name')}
-                  onMentionSelect={this.onMentionSelect}
-                  onMentionFocus={this.onMentionFocus}
-                  isFocused={this.state.focusedOptionIndex === index}
-                  mention={mention}
-                  index={index}
-                  id={`mention-option-${this.key}-${index}`}
+        <div ref="popoverHolder"
+            className={theme.mentionHolder}>
+                <CreateButton
+                  clickedCreate={this.createButtonClicked}
                   theme={theme}
-                  searchValue={this.lastSearchValue}
-                  entryComponent={entryComponent || defaultEntryComponent}
+                  isFocused={this.state.focusedOptionIndex === -1}
+                  index={-1}
                 />
-              )).toJS()
-            }
-          </div>
+              <div
+                {...elementProps}
+                className={theme.mentionSuggestions}
+                role="listbox"
+                id={`mentions-list-${this.key}`}
+                ref="popover"
+              >
+                {
+                  this.props.suggestions.map((mention, index) => (
+                    <Entry
+                      key={mention.has('id') ? mention.get('id') : mention.get('name')}
+                      onMentionSelect={this.onMentionSelect}
+                      onMentionFocus={this.onMentionFocus}
+                      isFocused={this.state.focusedOptionIndex === index}
+                      mention={mention}
+                      index={index}
+                      id={`mention-option-${this.key}-${index}`}
+                      theme={theme}
+                      searchValue={this.lastSearchValue}
+                      entryComponent={entryComponent || defaultEntryComponent}
+                    />
+                  )).toJS()
+                }
+              </div>
         </div>
     );
   }

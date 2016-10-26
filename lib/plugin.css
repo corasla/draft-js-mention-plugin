@@ -9,8 +9,9 @@
     border: none;
     font-size: 12px;
     padding: 0;
-    width: 115px;
+    width: 100%;
     height: 30px;
+    position: absolute;
 }
 
 .draftJsMentionPlugin__mentionCreateButton__ov9Ql:focus {
@@ -25,6 +26,26 @@
 .draftJsMentionPlugin__mentionCreateButtonFocused__2gtB_ {
     background-color: #527871;
     color: #fff;
+}
+.draftJsMentionPlugin__mentionHolder__2dez4 {
+    border: 1px solid #eee;
+    margin-top: 1.75em;
+    position: absolute;
+    width: 165px;
+    max-height: 96px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0px 4px 30px 0px rgba(220,220,220,1);
+    cursor: pointer;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    z-index: 2;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+    box-sizing: border-box;
 }
 .draftJsMentionPlugin__mention__29BEd, .draftJsMentionPlugin__mention__29BEd:visited {
   color: #527871;
@@ -77,19 +98,14 @@
   border-radius: 12px;
 }
 .draftJsMentionPlugin__mentionSuggestions__2DWjA {
-  border: 1px solid #eee;
   margin-top: 1.75em;
   position: absolute;
-  width: 165px;
+  width: 100%;
   max-height: 96px;
   overflow-y: scroll;
   overflow-x: hidden;
   background: #fff;
-  border-radius: 2px;
-  box-shadow: 0px 4px 30px 0px rgba(220,220,220,1);
   cursor: pointer;
-  padding-top: 8px;
-  padding-bottom: 8px;
   z-index: 2;
   display: -webkit-box;
   display: flex;
