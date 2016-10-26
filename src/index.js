@@ -124,12 +124,6 @@ const createMentionPlugin = (config = {}) => {
       store.getEditorState = getEditorState;
       store.setEditorState = setEditorState;
     },
-    // keyBindingFn: (keyboardEvent) => {
-    //     console.log('got something -> ');
-    //     console.log(event);
-    //     console.log(event.keyCode);
-    //     return undefined;
-    // },
     keyBindingFn: (keyboardEvent) => callbacks.keyBindingFn && callbacks.keyBindingFn(keyboardEvent),
     onDownArrow: (keyboardEvent) => callbacks.onDownArrow && callbacks.onDownArrow(keyboardEvent),
     onTab: (keyboardEvent) => callbacks.onTab && callbacks.onTab(keyboardEvent),

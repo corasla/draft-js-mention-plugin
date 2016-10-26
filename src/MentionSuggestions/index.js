@@ -35,7 +35,6 @@ export default class MentionSuggestions extends Component {
   componentWillMount() {
     this.key = genKey();
     this.props.callbacks.onChange = this.onEditorStateChange;
-    console.log('got props -> ', this.props.callbacks);
   }
 
   componentWillReceiveProps(nextProps) {
