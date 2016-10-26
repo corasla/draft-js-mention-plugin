@@ -1,3 +1,31 @@
+.draftJsMentionPlugin__mentionCreateButton__ov9Ql {
+    background-color: #ffffff;
+    color: #527871;
+    cursor: pointer;
+    float: left;
+    pointer-events: all;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    width: 115px;
+    height: 30px;
+}
+
+.draftJsMentionPlugin__mentionCreateButton__ov9Ql:focus {
+    outline: none;
+}
+
+.draftJsMentionPlugin__mentionCreateButton__ov9Ql:hover {
+    background-color: #527871;
+    color: #fff;
+}
+
+.draftJsMentionPlugin__mentionCreateButtonFocused__2gtB_ {
+    background-color: #527871;
+    color: #fff;
+}
 .draftJsMentionPlugin__mention__29BEd, .draftJsMentionPlugin__mention__29BEd:visited {
   color: #527871;
   /*display: inline-block;

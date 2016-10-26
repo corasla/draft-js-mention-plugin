@@ -1,0 +1,29 @@
+.mentionCreateButton {
+    background-color: #ffffff;
+    color: #527871;
+    cursor: pointer;
+    float: left;
+    pointer-events: all;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    width: 115px;
+    height: 30px;
+}
+
+.mentionCreateButton:focus {
+    outline: none;
+}
+
+.mentionCreateButton:hover {
+    background-color: #527871;
+    color: #fff;
+}
+
+.mentionCreateButtonFocused {
+    composes: mentionCreateButton;
+    background-color: #527871;
+    color: #fff;
+}

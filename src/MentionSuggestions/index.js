@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Entry from './Entry';
+import CreateButton from './CreateButton';
 import addMention from '../modifiers/addMention';
 import decodeOffsetKey from '../utils/decodeOffsetKey';
 import { genKey } from 'draft-js';
@@ -320,6 +321,10 @@ export default class MentionSuggestions extends Component {
     }
   };
 
+  createButtonClicked = () => {
+      console.log('prea tare!');
+  }
+
   render() {
     if (!this.state.isActive) {
       return null;
@@ -339,30 +344,33 @@ export default class MentionSuggestions extends Component {
       ...elementProps } = this.props;
 
     return (
-      <div
-        {...elementProps}
-        className={theme.mentionSuggestions}
-        role="listbox"
-        id={`mentions-list-${this.key}`}
-        ref="popover"
-      >
-        {
-          this.props.suggestions.map((mention, index) => (
-            <Entry
-              key={mention.has('id') ? mention.get('id') : mention.get('name')}
-              onMentionSelect={this.onMentionSelect}
-              onMentionFocus={this.onMentionFocus}
-              isFocused={this.state.focusedOptionIndex === index}
-              mention={mention}
-              index={index}
-              id={`mention-option-${this.key}-${index}`}
-              theme={theme}
-              searchValue={this.lastSearchValue}
-              entryComponent={entryComponent || defaultEntryComponent}
-            />
-          )).toJS()
-        }
-      </div>
+        <div>
+          <CreateButton clickedCreate={this.createButtonClicked}/>
+          <div
+            {...elementProps}
+            className={theme.mentionSuggestions}
+            role="listbox"
+            id={`mentions-list-${this.key}`}
+            ref="popover"
+          >
+            {
+              this.props.suggestions.map((mention, index) => (
+                <Entry
+                  key={mention.has('id') ? mention.get('id') : mention.get('name')}
+                  onMentionSelect={this.onMentionSelect}
+                  onMentionFocus={this.onMentionFocus}
+                  isFocused={this.state.focusedOptionIndex === index}
+                  mention={mention}
+                  index={index}
+                  id={`mention-option-${this.key}-${index}`}
+                  theme={theme}
+                  searchValue={this.lastSearchValue}
+                  entryComponent={entryComponent || defaultEntryComponent}
+                />
+              )).toJS()
+            }
+          </div>
+        </div>
     );
   }
 }

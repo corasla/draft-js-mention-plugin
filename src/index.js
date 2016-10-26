@@ -7,6 +7,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import { Map } from 'immutable';
 import mentionStyles from './mentionStyles.css';
 import mentionSuggestionsStyles from './mentionSuggestionsStyles.css';
+import mentionCreateButtonStyles from './mentionCreateButtonStyles.css';
 import mentionSuggestionsEntryStyles from './mentionSuggestionsEntryStyles.css';
 import suggestionsFilter from './utils/defaultSuggestionsFilter';
 import defaultPositionSuggestions from './utils/positionSuggestions';
@@ -18,6 +19,9 @@ const createMentionPlugin = (config = {}) => {
     mention: mentionStyles.mention,
     // CSS class for suggestions component
     mentionSuggestions: mentionSuggestionsStyles.mentionSuggestions,
+    // CSS class for create mention button component
+    mentionCreateButton: mentionCreateButtonStyles.mentionCreateButton,
+    mentionCreateButtonFocused: mentionCreateButtonStyles.mentionCreateButtonFocused,
     // CSS classes for an entry in the suggestions component
     mentionSuggestionsEntry: mentionSuggestionsEntryStyles.mentionSuggestionsEntry,
     mentionSuggestionsEntryFocused: mentionSuggestionsEntryStyles.mentionSuggestionsEntryFocused,
