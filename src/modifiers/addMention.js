@@ -17,7 +17,7 @@ const addMention = (editorState, mention, mentionTrigger, entityMutability) => {
   let mentionReplacedContent = Modifier.replaceText(
     editorState.getCurrentContent(),
     mentionTextSelection,
-    mention.get('name'),
+    '#' + mention.get('name'),
     null, // no inline style needed
     entityKey
   );

@@ -74,12 +74,12 @@ export default class MentionSuggestions extends Component {
         popover: this.refs.popoverHolder,
       });
       Object.keys(newStyles).forEach((key) => {
-        if (key !== 'transform') {
+        if (key !== 'transform' && key !== 'transition') {
             this.refs.popoverHolder.style[key] = newStyles[key];
         }
       });
       Object.keys(newStyles).forEach((key) => {
-          if (key === 'transform') {
+          if (key === 'transform' || key === 'transition') {
               this.refs.popover.style[key] = newStyles[key];
           }
       });
