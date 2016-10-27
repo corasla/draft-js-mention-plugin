@@ -110,7 +110,9 @@ export default class MentionSuggestions extends Component {
     const anchorOffset = selection.getAnchorOffset();
 
     // the list should not be visible if a range is selected or the editor has no focus
-    if (!selection.isCollapsed() || !selection.getHasFocus()) return removeList();
+    if (!selection.isCollapsed() || !selection.getHasFocus()) {
+        return removeList();
+    }
 
     // identify the start & end positon of each search-text
     const offsetDetails = searches.map((offsetKey) => decodeOffsetKey(offsetKey));
@@ -139,7 +141,11 @@ export default class MentionSuggestions extends Component {
         anchorOffset > start + 1 && anchorOffset <= end // @ is in the text or at the end
       ));
 
-    if (selectionIsInsideWord.every((isInside) => isInside === false)) return removeList();
+    if (selectionIsInsideWord.every((isInside) => isInside === false)) {
+        return removeList();
+    } else {
+        this.openDropdown();
+    }
 
     this.activeOffsetKey = selectionIsInsideWord
       .filter(value => value === true)
@@ -224,6 +230,7 @@ export default class MentionSuggestions extends Component {
   };
 
   onEscape = (keyboardEvent) => {
+    this.commitSelection();
     keyboardEvent.preventDefault();
 
     const activeOffsetKey = this.lastSelectionIsInsideWord
@@ -234,7 +241,7 @@ export default class MentionSuggestions extends Component {
     this.closeDropdown();
 
     // to force a re-render of the outer component to change the aria props
-    this.props.store.setEditorState(this.props.store.getEditorState());
+    // this.props.store.setEditorState(this.props.store.getEditorState());
   };
 
   onMentionSelect = (mention) => {
